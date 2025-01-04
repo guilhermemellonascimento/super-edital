@@ -46,7 +46,7 @@ const pathName = url.pathname
 			<section class="col-12 col-lg-10">
 				<div class="row">
           {contests.map((contest) => (
-            <Card slug={contest.slug} title={contest.title} situation={contest.situation} />
+            <Card contest={contest} />
           ))}
         </div>
 
