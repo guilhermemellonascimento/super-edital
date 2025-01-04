@@ -1,0 +1,367 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const { slug } = Astro.params;
+const response = await fetch(`http://localhost:3000/concursos/${slug}`);
+const json = await response.json();
+const contest = json.contest;
+---
+
+<Layout
+  title="Super Edital - Editais de Concursos Públicos no Brasil"
+  description=`${contest.title} - Super Edital`>
+	<main>
+    <div class="container mb-4 mt-4">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page">
+            <a href="/">Home</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">{contest.title}</li>
+        </ol>
+      </nav>
+    </div>
+
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="p-0 pb-0">
+              <!-- Card body -->
+              <div class="card-body d-flex justify-content-between flex-wrap">
+                <!-- Title and badge -->
+                <div>
+                  <!-- Title -->
+                  <h1 class="h3 mt-2 mb-1">{contest.title}</h1>
+                  <p class="mb-0 mt-2">
+                    {contest.institute}
+                    <i class="fa-solid fa-chevron-right"></i>
+                    {contest.board}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- =======================
+    Title and tabs END -->
+    
+    <!-- =======================
+    Content START -->
+    <section>
+      <div class="container">
+        <!-- Tabs contents START -->
+        <div class="tab-content mb-0" id="tour-pills-tabContent">
+    
+          <!-- Content item START -->
+          <div class="mt-4">
+            <div class="row g-4 g-lg-5">
+              <!-- Left side START -->
+              <div class="col-lg-7 col-xl-8">
+                <!-- Card START -->
+                <div class="mb-4">
+                  <!-- Card body -->
+                  <div class="card-body pt-0">
+                    <!-- <embed src={contest.file_url} width="100%" height="100%" type="application/pdf"> -->
+                    <iframe src={contest.file_url} width="100%" height="500" />
+                  </div>
+                </div>
+                <!-- Card END -->
+              </div>
+              <!-- Left side END -->
+    
+              <!-- Right side START -->
+              <div class="col-lg-5 col-xl-4">
+                <!-- Time table START -->
+                <div class="card shadow">
+    
+                  <!-- Card body -->
+                  <div class="card-body">
+                    <div class="list-group list-group-flush">
+                      <div class="list-group-item d-flex align-items-center px-0">
+                        <div class="flex-fill">
+                          <div class="d-block h6 font-semibold mb-1">Situação</div>
+                          <div class="badge text-bg-success">{contest.situation}</div>
+                        </div>
+                      </div>
+                      <div class="list-group-item d-flex align-items-center px-0">
+                        <div class="flex-fill">
+                          <div class="d-block h6 font-semibold mb-1">Data da prova</div>
+                          <span class="d-block text-sm mb-2">{contest.test_date}</span>
+                        </div>
+                      </div>
+                      <div class="list-group-item d-flex align-items-center px-0">
+                        <div class="flex-fill">
+                          <div class="d-block h6 font-semibold mb-1">Inscrições</div>
+                          <span class="d-block text-sm mb-2">{contest.registration_date}</span>
+                        </div>
+                      </div>
+                      <div class="list-group-item d-flex align-items-center px-0">
+                        <div class="flex-fill">
+                          <div class="d-block h6 font-semibold mb-1">Taxa de inscrição</div>
+                          <span class="d-block text-sm mb-2">{contest.fee}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Time table END -->
+              </div>
+              <!-- Right side END -->
+            </div>
+          </div>
+          <!-- Content item END -->
+    
+          <!-- Content item START -->
+          <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2">
+            <div class="row g-4">
+              <!-- Left side START -->
+              <div class="col-lg-8">
+                <!-- Card item -->
+                <div class="card card-body border mb-4">
+                  <!-- Badge -->
+                  <div class="d-sm-flex justify-content-between mb-2">
+                    <div class="mb-2 mb-sm-0">
+                      <div class="badge text-bg-dark"><i class="bi bi-scissors fa-fw text-warning"></i> Salon</div>
+                      <div class="badge text-bg-success">40% off</div>
+                    </div>	
+                    <span class="text-success">Free Cancellation</span>
+                  </div>	
+                  <!-- Title -->
+                  <h5 class="card-title mb-2"><a href="#">Monsoon Offer: Men: Global Hair Color With Free Manicure / Pedicure / Haircut</a></h5>
+                  <!-- List -->
+                  <div class="d-flex align-items-center flex-wrap">
+                    <span class="me-2">Valid for:</span>
+                    <ul class="nav nav-divider h6 fw-light mb-0">
+                      <li class="nav-item"><i class="bi bi-person me-1"></i>1 Male</li>
+                      <li class="nav-item"><i class="bi bi-calendar me-1"></i>Mon - Fri</li>
+                      <li class="nav-item"><i class="bi bi-clock me-1"></i>11 AM - 6 PM</li>
+                    </ul>
+                  </div>
+    
+                  <!-- Price and button -->
+                  <div class="d-sm-flex justify-content-between mt-4">
+                    <div class="hstack gap-1">
+                      <h5 class="mb-0">$1500</h5>
+                      <span class="text-decoration-line-through">$1800</span>
+                    </div>
+                    <div class="mt-2 mt-sm-0">
+                      <a href="#" class="btn btn-sm btn-light mb-0" data-bs-toggle="modal" data-bs-target="#detailModal">View Details</a>
+                      <a href="#" class="btn btn-sm btn-primary mb-0"><i class="bi bi-plus-lg"></i> Add</a>
+                    </div>	
+                  </div>
+                </div>
+    
+                <!-- Card item -->
+                <div class="card card-body border mb-4">
+                  <!-- Badge -->
+                  <div class="d-sm-flex justify-content-between mb-2">
+                    <div class="mb-2 mb-sm-0">
+                      <div class="badge text-bg-dark"><i class="fa-solid fa-spa fa-fw text-warning"></i> Spa</div>
+                      <div class="badge text-bg-success">30% off</div>
+                    </div>	
+                    <span class="text-success">Free Cancellation</span>
+                  </div>	
+                  <!-- Title -->
+                  <h5 class="card-title mb-2"><a href="#">Women Special Offer (Aroma Therapy - 30 min)</a></h5>
+                  <!-- List -->
+                  <div class="d-flex align-items-center flex-wrap">
+                    <span class="me-2">Valid for:</span>
+                    <ul class="nav nav-divider h6 fw-light mb-0">
+                      <li class="nav-item"><i class="bi bi-person me-1"></i>1 Female</li>
+                      <li class="nav-item"><i class="bi bi-calendar me-1"></i>Mon - Fri</li>
+                      <li class="nav-item"><i class="bi bi-clock me-1"></i>11 AM - 6 PM</li>
+                    </ul>
+                  </div>
+    
+                  <!-- Price and button -->
+                  <div class="d-sm-flex justify-content-between mt-4">
+                    <div class="hstack gap-1">
+                      <h5 class="mb-0">$820</h5>
+                      <span class="text-decoration-line-through">$900</span>
+                    </div>
+                    <div class="mt-2 mt-sm-0">
+                      <a href="#" class="btn btn-sm btn-light mb-0" data-bs-toggle="modal" data-bs-target="#detailModal">View Details</a>
+                      <a href="#" class="btn btn-sm btn-primary mb-0"><i class="bi bi-plus-lg"></i> Add</a>
+                    </div>	
+                  </div>
+                </div>
+              </div>
+              <!-- Left side END -->
+    
+              <!-- Right side START -->
+              <div class="col-lg-4">
+                <!-- Buy now widget -->
+                <div class="card shadow mb-4">
+                  <!-- Card header -->
+                  <div class="card-header border-bottom">
+                    <h5 class="mb-0">Your Order</h5>
+                  </div>
+                  <!-- Card body -->
+                  <div class="card-body">
+                    <!-- Price -->
+                    <ul class="list-group list-group-borderless mb-3">
+                      <li class="list-group-item d-flex justify-content-between py-2">
+                        <span class="h6 fw-light mb-0">Monsoon Offer</span>
+                        <span class="h6 fw-light mb-0">$260 (x1)</span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between py-2">
+                        <span class="h6 fw-light mb-0">Monsoon Offer:global</span>
+                        <span class="h6 fw-light mb-0">$50</span>
+                      </li>
+                      <li class="list-group-item py-2"><hr class="my-0"></li> 
+                      <!-- Divider -->
+                      <li class="list-group-item d-flex justify-content-between pb-0">
+                        <div>
+                          <h5 class="fw-normal mb-0">Total</h5>
+                          <small>Inc. of all taxes</small>
+                        </div>
+                        <span class="h5 fw-normal mb-0">$310</span>
+                      </li>
+                    </ul>
+    
+                    <!-- Button -->
+                    <a href="#" class="btn btn-primary-soft w-100 mb-0">Buy now</a>
+                  </div>
+                </div>
+    
+                <!-- Coupon code widget -->
+                <div class="card card-body shadow">
+                  <div class="cardt-title">
+                    <h5>Save $70 instant of code</h5>
+                  </div>
+    
+                  <ul class="list-group list-group-borderless mb-0">
+                    <li class="list-group-item small pb-0"><i class="bi bi-patch-check-fill text-success me-1"></i>Valid on all prepaid deals</li>
+                    <li class="list-group-item small pb-0"><i class="bi bi-patch-check-fill text-success me-1"></i>No minimum purchase</li>
+                  </ul>
+                  <!-- Input group -->
+                  <div class="input-group mt-3">
+                    <input class="form-control form-control border-dashed" placeholder="Coupon code" value="BOOK56">
+                    <button type="button" class="btn btn-primary">Copy</button>
+                  </div>
+                </div>
+              </div>
+              <!-- Right side END -->
+    
+            </div>
+          </div>
+    
+          <!-- Content item START -->
+          <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab-3">
+            <!-- Spa services -->
+            <h5 class="mb-3"><i class="fa-solid fa-spa fa-fw text-warning"></i> Spa Services</h5>
+            <div class="row">
+              <div class="col-sm-6 col-lg-4 col-xl-3">
+                <ul class="list-group list-group-borderless mb-0">
+                  <li class="list-group-item h6 fw-normal mb-0">
+                    <a href="#" class="mb-0"> <i class="bi fa-fw bi-arrow-right me-1"></i>Foot Treatments </a>
+                  </li>
+                  <li class="list-group-item h6 fw-normal mb-0">
+                    <a href="#" class="mb-0"> <i class="bi fa-fw bi-arrow-right me-1"></i>Body Massage </a>
+                  </li>
+                  <li class="list-group-item h6 fw-normal mb-0">
+                    <a href="#" class="mb-0"> <i class="bi fa-fw bi-arrow-right me-1"></i>Our Special Massage</a>
+                  </li>
+                </ul>
+              </div>
+    
+              <div class="col-sm-6 col-lg-4 col-xl-3">
+                <ul class="list-group list-group-borderless mb-0">
+                  <li class="list-group-item h6 fw-normal mb-0">
+                    <a href="#" class="mb-0"> <i class="bi fa-fw bi-arrow-right me-1"></i>Head &amp; Foot Treatments </a>
+                  </li>
+                  <li class="list-group-item h6 fw-normal mb-0">
+                    <a href="#" class="mb-0"> <i class="bi fa-fw bi-arrow-right me-1"></i>Body Spa - Scrubs</a>
+                  </li>
+                </ul>
+              </div>
+    
+              <div class="col-sm-6 col-lg-4 col-xl-3">
+                <ul class="list-group list-group-borderless mb-0">
+                  <li class="list-group-item h6 fw-normal mb-0">
+                    <a href="#" class="mb-0"> <i class="bi fa-fw bi-arrow-right me-1"></i>Body DE-Tanning</a>
+                  </li>
+                  <li class="list-group-item h6 fw-normal mb-0">
+                    <a href="#" class="mb-0"> <i class="bi fa-fw bi-arrow-right me-1"></i>Body Polishing </a>
+                  </li>
+                </ul>
+              </div>
+    
+              <div class="col-sm-6 col-lg-4 col-xl-3">
+                <ul class="list-group list-group-borderless mb-0">
+                  <li class="list-group-item h6 fw-normal mb-0">
+                    <a href="#" class="mb-0"> <i class="bi fa-fw bi-arrow-right me-1"></i>Back Treatments </a>
+                  </li>
+                  <li class="list-group-item h6 fw-normal mb-0">
+                    <a href="#" class="mb-0"> <i class="bi fa-fw bi-arrow-right me-1"></i>Manicure &amp; Pedicure</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+    
+            <!-- Salon services -->
+            <h5 class="mb-3 mt-5"><i class="bi bi-scissors fa-fw text-warning"></i> Salon Services</h5>
+            <div class="row">
+              <div class="col-sm-6 col-lg-4 col-xl-3">
+                <ul class="list-group list-group-borderless mb-0">
+                  <li class="list-group-item h6 fw-normal mb-0">
+                    <a href="#" class="mb-0"> <i class="bi fa-fw bi-arrow-right me-1"></i>Threading</a>
+                  </li>
+                  <li class="list-group-item h6 fw-normal mb-0">
+                    <a href="#" class="mb-0"> <i class="bi fa-fw bi-arrow-right me-1"></i>Bleach</a>
+                  </li>
+                </ul>
+              </div>
+    
+              <div class="col-sm-6 col-lg-4 col-xl-3">
+                <ul class="list-group list-group-borderless mb-0">
+                  <li class="list-group-item h6 fw-normal mb-0">
+                    <a href="#" class="mb-0"> <i class="bi fa-fw bi-arrow-right me-1"></i>Waxing</a>
+                  </li>
+                  <li class="list-group-item h6 fw-normal mb-0">
+                    <a href="#" class="mb-0"> <i class="bi fa-fw bi-arrow-right me-1"></i>Blow Dry</a>
+                  </li>
+                </ul>
+              </div>
+    
+              <div class="col-sm-6 col-lg-4 col-xl-3">
+                <ul class="list-group list-group-borderless mb-0">
+                  <li class="list-group-item h6 fw-normal mb-0">
+                    <a href="#" class="mb-0"> <i class="bi fa-fw bi-arrow-right me-1"></i>Hair Colour</a>
+                  </li>
+                  <li class="list-group-item h6 fw-normal mb-0">
+                    <a href="#" class="mb-0"> <i class="bi fa-fw bi-arrow-right me-1"></i>Facial &amp; Cleanup</a>
+                  </li>
+                </ul>
+              </div>
+    
+              <div class="col-sm-6 col-lg-4 col-xl-3">
+                <ul class="list-group list-group-borderless mb-0">
+                  <li class="list-group-item h6 fw-normal mb-0">
+                    <a href="#" class="mb-0"> <i class="bi fa-fw bi-arrow-right me-1"></i>Pre Bridal</a>
+                  </li>
+                  <li class="list-group-item h6 fw-normal mb-0">
+                    <a href="#" class="mb-0"> <i class="bi fa-fw bi-arrow-right me-1"></i>Bridal Makeup</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Tabs contents END -->		
+      </div>
+    </section>
+    <!-- =======================
+    Content END -->
+    
+    </main>
+</Layout>
+
+<style>
+  .card {
+    border-width: 0;
+  }
+</style>

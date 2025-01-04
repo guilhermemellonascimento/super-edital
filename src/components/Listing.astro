@@ -1,0 +1,63 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from './Card.astro';
+import Filter from './Filter.astro';
+import Paginator from './search/Paginator.astro';
+
+const { contests, pagination, title, description } = Astro.props;
+
+const url = new URL(Astro.request.url);
+const pathName = url.pathname
+---
+
+<Layout title={title}, description={description}>
+	<main class="container-fluid">
+		<div class="row mb-4 border-bottom mt-4 mt-md-0">
+      <h1 class="h4">
+        {pathName === '/' && 'Editais de Concursos Públicos'}
+
+        {pathName === '/concursos/nacional' && 'Editais de Concursos Públicos - Nacional'}
+        {pathName === '/concursos/sul' && 'Editais de Concursos Públicos - Sul'}
+        {pathName === '/concursos/sudeste' && 'Editais de Concursos Públicos - Sudeste'}
+        {pathName === '/concursos/centro-oeste' && 'Editais de Concursos Públicos - Centro-oeste'}
+        {pathName === '/concursos/norte' && 'Editais de Concursos Públicos - Norte'}
+        {pathName === '/concursos/nordeste' && 'Editais de Concursos Públicos - Nordeste'}
+
+        {pathName === '/concursos/previstos' && 'Editais de Concursos Públicos - Previstos'}
+        {pathName === '/concursos/autorizados' && 'Editais de Concursos Públicos - Autorizados'}
+        {pathName === '/concursos/abertos' && 'Editais de Concursos Públicos - Abertos'}
+        {pathName === '/concursos/inscricoes-abertas' && 'Editais de Concursos Públicos - Inscrições Abertas'}
+        {pathName === '/concursos/inscricoes-encerradas' && 'Editais de Concursos Públicos - Inscrições Encerradas'}
+        {pathName === '/concursos/encerrados' && 'Editais de Concursos Públicos - Encerrados'}
+      </h1>
+		</div>
+		<div class="gx- row">
+      <div class="d-flex justify-content-start mb-3">
+        <a class="text-muted btn-primary d-md-none" data-bs-toggle="collapse" data-bs-target="#filter">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+          </svg>
+          Filtros
+        </a>
+      </div>
+
+			<Filter />
+			
+			<section class="col-12 col-lg-10">
+				<div class="row">
+          {contests.map((contest) => (
+            <Card slug={contest.slug} title={contest.title} situation={contest.situation} />
+          ))}
+        </div>
+
+        <Paginator pagination={pagination} />
+			</section>
+		</div>
+	</main>
+</Layout>
+
+<style>
+  a {
+    text-decoration: none;
+  }
+</style>

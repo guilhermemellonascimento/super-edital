@@ -1,61 +1,95 @@
 ---
 interface Props {
-	title: string;
-	body: string;
-	href: string;
+	title: number;
+	slug: string;
+	situation: string;
 }
 
-const { href, title, body } = Astro.props;
+const { title, slug, situation } = Astro.props;
+
+const situationColors = {
+  aberto: 'success',
+  autorizados: 'warning',
+  previstos: 'info',
+  default: 'muted'
+};
+
+const situationColor = situationColors[situation.toLocaleLowerCase()] || situationColors.default;
 ---
 
-<li class="link-card">
-	<a href={href}>
-		<h2>
-			{title}
-			<span>&rarr;</span>
-		</h2>
-		<p>
-			{body}
-		</p>
-	</a>
-</li>
+<div class="col-12 col-lg-3 mb-3">
+	<div class="card shadow">
+		<div class="card-header border-0">
+			<div class="d-flex justify-content-between align-items-center">
+				<div>
+                    <span class="h6 text-sm font-semibold">
+                        <span class={`text-${situationColor} me-2`}>●</span> {situation}
+                    </span>
+                </div>
+			</div>
+		</div>
+		<div class="card-body text-center">
+            <div class="card-body-text">
+			    <a href={ `/concursos/${slug}`} class="h5 d-block my-6">{title}</a>
+            </div>
+			<div class="d-flex justify-content-between mt-8 px-4"><a href="#" class="px-2 text-muted text-primary-hover"><i class="bi bi-clipboard-data"></i> </a><a href="#" class="px-2 text-muted text-primary-hover"><i class="bi bi-people"></i> </a><a href="#" class="px-2 text-muted text-primary-hover"><i class="bi bi-trash"></i></a></div>
+			<hr class="my-7">
+			<div class="row justify-content-between align-items-center">
+					<div class="col-6"><span class="d-block h6 text-heading mb-0">$9.800</span> <span class="d-block text-sm text-muted">Salário</span></div>
+					<div class="col-6"><span class="d-block h6 text-heading mb-0">7</span> <span class="d-block text-sm text-muted">Vagas</span></div>
+			</div>
+		</div>
+	</div>
+</div>
+
 <style>
-	.link-card {
-		list-style: none;
-		display: flex;
-		padding: 1px;
-		background-color: #23262d;
-		background-image: none;
-		background-size: 400%;
-		border-radius: 7px;
-		background-position: 100%;
-		transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+	.card {
+    --x-card-spacer-y: 1.5rem;
+    --x-card-spacer-x: 1.5rem;
+    --x-card-title-spacer-y: 1.5rem;
+    --x-card-border-width: 1px;
+    --x-card-border-color: #e7eaf0;
+    --x-card-border-radius: .75rem;
+    --x-card-box-shadow: ;
+    --x-card-inner-border-radius: calc(.75rem - 1px);
+    --x-card-cap-padding-y: 1.25rem;
+    --x-card-cap-padding-x: 1.5rem;
+    --x-card-cap-bg: transparent;
+    --x-card-cap-color: #16192c;
+    --x-card-height: ;
+    --x-card-color: #525f7f;
+    --x-card-bg: #fff;
+    --x-card-img-overlay-padding: 1rem;
+    --x-card-group-margin: .75rem;
+    min-width: 0;
+    height: var(--x-card-height);
+    word-wrap: break-word;
+    background-color: var(--x-card-bg);
+    border: var(--x-card-border-width) solid var(--x-card-border-color);
+    border-radius: var(--x-card-border-radius);
+    box-shadow: var(--x-card-box-shadow);
+    background-clip: border-box;
+    flex-direction: column;
+    display: flex;
+    position: relative;
 	}
-	.link-card > a {
-		width: 100%;
-		text-decoration: none;
-		line-height: 1.4;
-		padding: calc(1.5rem - 1px);
-		border-radius: 8px;
-		color: white;
-		background-color: #23262d;
-		opacity: 0.8;
-	}
-	h2 {
-		margin: 0;
-		font-size: 1.25rem;
-		transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-	}
-	p {
-		margin-top: 0.5rem;
-		margin-bottom: 0;
-	}
-	.link-card:is(:hover, :focus-within) {
-		background-position: 0;
-		background-image: var(--accent-gradient);
-	}
-	.link-card:is(:hover, :focus-within) h2 {
-		color: rgb(var(--accent-light));
-	}
+	.card-header {
+    /* padding: var(--x-card-cap-padding-y) var(--x-card-cap-padding-x); */
+    color: var(--x-card-cap-color);
+    background-color: var(--x-card-cap-bg);
+    border-bottom: var(--x-card-border-width) solid var(--x-card-border-color);
+    margin-bottom: 0;
+    }
+    .card-body a {
+        text-decoration: none;
+    }
+    .card-min-size {
+    min-width: 200px;
+    }
+    .card-body {
+        min-height: 200px;
+    }
+    .card-body-text {
+        min-height: 100px;
+    }
 </style>

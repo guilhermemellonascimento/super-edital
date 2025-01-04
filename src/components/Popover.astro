@@ -1,0 +1,56 @@
+<style>
+  .custom-popover {
+    position: absolute;
+    display: none;
+    z-index: 1000;
+  }
+</style>
+
+<div>
+  <div class="content">
+    <slot />
+  </div>
+
+  <div class="custom-popover btn-group">
+    <button class="btn btn-primary btn-sm">Highlight</button>
+    <button class="btn btn-secondary btn-sm">Copy</button>
+    <button class="btn btn-info btn-sm">Share</button>
+  </div>
+</div>
+
+<script>
+  const popover = document.querySelector('.custom-popover');
+
+  document.addEventListener('mouseup', (event) => {
+    const selectedText = window.getSelection().toString().trim();
+
+    if (selectedText) {
+      const range = window.getSelection().getRangeAt(0);
+      const rect = range.getBoundingClientRect();
+
+      // Position the popover
+      popover.style.top = `${window.scrollY + rect.top - popover.offsetHeight - 10}px`;
+      popover.style.left = `${window.scrollX + rect.left}px`;
+      popover.style.display = 'block';
+    } else {
+      // Hide the popover if no text is selected
+      popover.style.display = 'none';
+    }
+  });
+
+  // Optional: Hide popover when clicking elsewhere
+  document.addEventListener('mousedown', (event) => {
+    if (!popover.contains(event.target)) {
+      popover.style.display = 'none';
+    }
+  });
+
+  // Add event listeners for popover buttons
+  popover.addEventListener('click', (event) => {
+    const selectedText = window.getSelection().toString().trim();
+    if (event.target.textContent === 'Copy') {
+      navigator.clipboard.writeText(selectedText);
+      alert('Text copied to clipboard!');
+    }
+  });
+</script>

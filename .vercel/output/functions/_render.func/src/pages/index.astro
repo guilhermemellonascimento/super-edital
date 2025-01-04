@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+
+const response = await fetch('http://localhost:3000/editals');
+const data = await response.json();
+console.log(data);
+---
+
+<Layout title="Welcome to Astro.">
+	<main>
+		<br /><br /><br /><br /><br /><br />
+		a
+		{data.title}
+	</main>
+</Layout>
+
+<style>
+</style>

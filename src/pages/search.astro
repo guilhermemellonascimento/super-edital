@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+
+const url = new URL(Astro.url.href);
+const query = url.searchParams.get('query');
+
+let contests = [];
+if (query) {
+  const response = await fetch(`http://localhost:3000/search?query=${query}`);
+  const data = await response.json();
+  contests = data.results || [];
+}
+---
+
+<Layout
+  title="Super Edital - Editais de Concursos Públicos no Brasil"
+  description="Super Edital: encontre os principais editais de concursos públicos e prepare-se para alcançar sua aprovação!"
+  >
+	<main class="container-fluid">
+		<div class="row mb-4 border-bottom mt-4">
+			<h1 class="h4">Foram encontrados {contests.length} concursos</h1>
+		</div>
+		<!-- <div class="gx-0"> -->
+			<section class="col-lg-12 col-md-12">
+				<div class="row">
+				  {contests.map((contest) => (
+					  <Card slug={contest.slug} title={contest.title} situation={contest.situation} />
+				  ))}
+        </div>
+			</section>
+		<!-- </div> -->
+	</main>
+</Layout>

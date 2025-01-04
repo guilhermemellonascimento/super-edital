@@ -1,0 +1,25 @@
+---
+import Listing from '../../../components/Listing.astro';
+
+const url = Astro.request.url;
+const searchParams = new URL(url).searchParams;
+const page = parseInt(searchParams.get('page')) || 1;
+
+const fetchContests = async () => {
+  const response = await fetch(`http://localhost:3000/concursos/centro-oeste?page=${page}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch contests');
+  }
+  const data = await response.json();
+  return data;
+};
+
+const { contests, pagination } = await fetchContests();
+---
+
+<Listing
+  contests={contests}
+  pagination={pagination}
+  title="Editais de Concursos Públicos - Região Centro-Oeste | Super Edital"
+  description="Confira os concursos públicos disponíveis na Região Centro-Oeste do Brasil, com detalhes sobre vagas, editais e prazos de inscrição. Oportunidades em Goiás, Mato Grosso, Mato Grosso do Sul e Distrito Federal!"
+/>

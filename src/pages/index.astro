@@ -1,19 +1,27 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
+import Listing from '../components/Listing.astro';
 
-const response = await fetch('http://localhost:3000/editals');
-const data = await response.json();
-console.log(data);
+const url = Astro.request.url;
+const searchParams = new URL(url).searchParams;
+const page = parseInt(searchParams.get('page')) || 1;
+
+const response = await fetch(`http://localhost:3000/concursos?page=${page}`);
+const { contests, pagination } = await response.json();
 ---
 
-<Layout title="Welcome to Astro.">
-	<main>
-		<br /><br /><br /><br /><br /><br />
-		a
-		{data.title}
-	</main>
-</Layout>
+<Listing
+  contests={contests}
+  pagination={pagination}
+  title="Super Edital - Editais de Concursos Públicos no Brasil"
+  description="Super Edital: encontre os principais editais de concursos públicos e prepare-se para alcançar sua aprovação!"
+/>
 
 <style>
+  a {
+    color: #001e2b;
+  }
+  a:hover {
+    color: #3db106;
+  }
 </style>
+

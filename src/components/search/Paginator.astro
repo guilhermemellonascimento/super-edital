@@ -1,0 +1,76 @@
+---
+const { pagination } = Astro.props;
+---
+
+<div class="d-flex justify-content-center">
+  <div class="row">
+    <div class="col">
+      {pagination.totalItems > 0 ? (
+        <div class="d-md-flex justify-content-between align-items-center">
+          <ul class="pagination mt-2 mt-md-0" role="navigation" aria-label="Pagination">
+            
+            {/* Previous Button */}
+            <li class={`page-item ${pagination.currentPage > 1 ? '' : 'disabled'}`}>
+              <a
+                class="page-link mx-1 rounded"
+                href={pagination.currentPage > 1 ? `/concursos?page=${pagination.currentPage - 1}` : '#'}
+                tabindex="-1"
+                aria-disabled={pagination.currentPage <= 1 ? 'true' : 'false'}
+                aria-label="Previous page"
+                rel="prev"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="14px" height="14px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </a>
+            </li>
+
+            {/* Current Page */}
+            <li class="page-item active">
+              <a
+                class="page-link mx-1 rounded"
+                href={`/?page=${pagination.currentPage}`}
+                role="button"
+                aria-label={`Page ${pagination.currentPage} is your current page`}
+                aria-current="page"
+              >
+                {pagination.currentPage}
+              </a>
+            </li>
+
+            {/* Next Button */}
+            <li class={`page-item ${pagination.currentPage < pagination.totalPages ? '' : 'disabled'}`}>
+              <a
+                class="page-link mx-1 rounded"
+                href={pagination.currentPage < pagination.totalPages ? `/concursos?page=${pagination.currentPage + 1}` : '#'}
+                role="button"
+                aria-disabled={pagination.currentPage >= pagination.totalPages ? 'true' : 'false'}
+                aria-label="Next page"
+                rel="next"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="14px" height="14px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </a>
+            </li>
+
+          </ul>
+        </div>
+        ) : (
+          <div>
+            <h6>Nenhum edital foi encontrado</h6>
+          </div>
+        )}
+    </div>
+  </div>
+</div>
+
+<style>
+  .active>.page-link {
+    background-color: #3db106;
+    border-color: #3db106;
+  }
+  .pagination {
+    --bs-pagination-color: #3db106;
+  }
+</style>

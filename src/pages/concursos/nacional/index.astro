@@ -1,0 +1,25 @@
+---
+import Listing from '../../../components/Listing.astro';
+
+const url = Astro.request.url;
+const searchParams = new URL(url).searchParams;
+const page = parseInt(searchParams.get('page')) || 1;
+
+const fetchContests = async () => {
+  const response = await fetch(`http://localhost:3000/concursos/nacional?page=${page}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch contests');
+  }
+  const data = await response.json();
+  return data;
+};
+
+const { contests, pagination } = await fetchContests();
+---
+
+<Listing
+  contests={contests}
+  pagination={pagination}
+  title="Editais de Concursos Públicos - Nacional | Super Edital"
+  description="Encontre concursos públicos em todo o Brasil, com informações atualizadas sobre vagas, editais e prazos de inscrição"
+/>
