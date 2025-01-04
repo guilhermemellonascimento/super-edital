@@ -23,6 +23,8 @@ const { title, description } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<meta name="description" content={description}>
+
+		<link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" as="style" type="text/css" crossorigin="anonymous">
 	</head>
 	<body>
 		<Header />
