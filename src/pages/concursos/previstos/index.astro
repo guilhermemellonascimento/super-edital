@@ -6,7 +6,7 @@ const searchParams = new URL(url).searchParams;
 const page = parseInt(searchParams.get('page')) || 1;
 
 const fetchContests = async () => {
-  const response = await fetch(`http://localhost:3000/concursos/previstos?page=${page}`);
+  const response = await fetch(`https://super-edital-api-git-main-guilhermes-projects-31b64a2d.vercel.app/concursos/previstos?page=${page}`);
   if (!response.ok) {
     throw new Error('Failed to fetch contests');
   }
