@@ -13,7 +13,7 @@ const { pagination } = Astro.props;
             <li class={`page-item ${pagination.currentPage > 1 ? '' : 'disabled'}`}>
               <a
                 class="page-link mx-1 rounded"
-                href={pagination.currentPage > 1 ? `/concursos?page=${pagination.currentPage - 1}` : '#'}
+                href={pagination.currentPage > 1 ? `?page=${pagination.currentPage - 1}` : '#'}
                 tabindex="-1"
                 aria-disabled={pagination.currentPage <= 1 ? 'true' : 'false'}
                 aria-label="Previous page"
@@ -42,7 +42,7 @@ const { pagination } = Astro.props;
             <li class={`page-item ${pagination.currentPage < pagination.totalPages ? '' : 'disabled'}`}>
               <a
                 class="page-link mx-1 rounded"
-                href={pagination.currentPage < pagination.totalPages ? `/concursos?page=${pagination.currentPage + 1}` : '#'}
+                href={pagination.currentPage < pagination.totalPages ? `?page=${pagination.currentPage + 1}` : '#'}
                 role="button"
                 aria-disabled={pagination.currentPage >= pagination.totalPages ? 'true' : 'false'}
                 aria-label="Next page"
