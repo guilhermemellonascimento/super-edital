@@ -1,4 +1,6 @@
 ---
+import SituationBullet from "./util/SituationBullet.astro";
+
 const { contest } = Astro.props;
 
 const situationColors = {
@@ -13,12 +15,15 @@ const situationColor = situationColors[contest.situation.toLocaleLowerCase()] ||
 
 <div class="col-12 col-lg-3 mb-3">
 	<div class="card shadow">
+        {contest.hot && (
+            <div class="card-featured">
+                <i class="fa-solid fa-star"></i>
+            </div>
+        )}
 		<div class="card-header border-0">
 			<div class="d-flex justify-content-between align-items-center">
 				<div>
-                    <span class="h6 text-sm font-semibold">
-                        <span class={`text-${situationColor} me-2`}>●</span> {contest.situation}
-                    </span>
+                    <SituationBullet contest={contest} />
                 </div>
 			</div>
 		</div>
@@ -68,6 +73,7 @@ const situationColor = situationColors[contest.situation.toLocaleLowerCase()] ||
     flex-direction: column;
     display: flex;
     position: relative;
+    overflow: hidden;
 	}
 	.card-header {
     /* padding: var(--x-card-cap-padding-y) var(--x-card-cap-padding-x); */
@@ -83,16 +89,28 @@ const situationColor = situationColors[contest.situation.toLocaleLowerCase()] ||
     min-width: 200px;
     }
     .card-body {
-        min-height: 200px;
+        min-height: 230px;
     }
     .card-body-text {
         min-height: 100px;
     }
     .truncate {
         display: -webkit-box;
-        -webkit-line-clamp: 3; /* Number of lines to show */
+        -webkit-line-clamp: 4; /* Number of lines to show */
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
     }
+    .card-featured {
+        position: absolute;
+    z-index: 99;
+    background: #e52c04;
+    color: var(--bs-white);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    text-align: center;
+    top: -8px;
+    right: -48px;
+    width: 120px;
+    padding: 16px 0 3px 0;
 </style>

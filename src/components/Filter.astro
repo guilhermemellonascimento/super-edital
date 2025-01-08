@@ -5,7 +5,7 @@ const activePage = Astro.url.pathname;
 <aside id="filter" class="mb-6 mb-md-0 col-12 col-md-2 collapse d-md-block">
   <div class="mb-8">
     <h5 class="mb-3">Situação</h5>
-    <ul class="nav nav-category">
+    <div class="nav nav-category">
        <div class="border-bottom w-100 nav-item">
           <a href="/concursos/previstos" aria-expanded="false" role="button" class={`nav-link ${activePage === '/concursos/previstos' ? 'active' : ''}`} tabindex="0">
              Previstos
@@ -54,12 +54,12 @@ const activePage = Astro.url.pathname;
              </svg>
           </a>
        </div>
-    </ul>
+   </div>
  </div>
  
  <div class="mt-3">
   <h5 class="mb-3">Regiões</h5>
-  <ul id="categoryCollapseMenu" class="nav nav-category">
+  <div id="categoryCollapseMenu" class="nav nav-category">
      <div class="border-bottom w-100 nav-item">
         <a href="/concursos/nacional" aria-expanded="false" role="button" class={`nav-link ${activePage === '/concursos/nacional' ? 'active' : ''}`} tabindex="0">
            Nacional
@@ -108,7 +108,7 @@ const activePage = Astro.url.pathname;
            </svg>
         </a>
      </div>
-  </ul>
+   </div>
 </div>
 </aside>
 

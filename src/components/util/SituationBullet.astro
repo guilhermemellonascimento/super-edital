@@ -1,0 +1,18 @@
+---
+const { contest } = Astro.props;
+
+const mapping = {
+  InscricoesAbertas: { text: "Inscrições Abertas", color: "text-danger" },
+  Aberto: { text: "Aberto", color: "text-success" },
+  Previstos: { text: "Previsto", color: "text-info" },
+  Autorizados: { text: "Autorizado", color: "text-warning" },
+  InscricoesEncerradas: { text: "Inscrições Encerradas", color: "text-secondary" },
+  Encerrado: { text: "Encerrado", color: "text-secondary" },
+};
+
+const situation = mapping[contest.situation]
+---
+
+<span class="h6 text-sm font-semibold">
+  <span class=`${situation.color} me-2`>●</span> {situation.text}
+</span>
