@@ -1,0 +1,57 @@
+---
+import Blog from "../../layouts/Blog.astro";
+import { fetchPosts } from "../../utils/fetchPosts";
+
+const data = await fetchPosts(); // Fetch the data
+const posts = data.posts; // Extract the posts array
+
+const featuredPost = posts.find(post => post.featured === "true");
+const normalPosts = posts.filter(post => post.featured !== "true");
+---
+
+<Blog
+  title="Super Edital - Tudo sobre Concursos Públicos: Editais, Dicas e Preparação"
+  description="Acompanhe editais atualizados, dicas de estudos, materiais gratuitos e notícias para conquistar sua aprovação"
+>  
+        <div class="container">
+          <div class="row">
+              <!-- Blog entries-->
+              <div class="col-12">
+                <h1 class="mb-4">Notícias e artigos sobre Concursos Públicos</h1>
+
+                  <!-- Featured blog post-->
+                  {featuredPost && (
+                    <div class="card mb-4">
+                        <a href=`/blog/${featuredPost.slug}`><img class="card-img-top" src=`/posts/${featuredPost.folder_big}` alt="..."></a>
+                        <div class="card-body">
+                            <div class="small text-muted">{featuredPost.date}</div>
+                            <h2 class="card-title">{featuredPost.title}</h2>
+                            <p class="card-text">
+                              {featuredPost.header}
+                            </p>
+                            <a class="btn btn-edital" href=`/blog/${featuredPost.slug}`>Ler mais →</a>
+                        </div>
+                    </div>
+                  )}
+
+                  <!-- Nested row for non-featured blog posts-->
+                  <div class="row">
+                    {normalPosts.map(post => (
+                      <div class="col-lg-6">
+                          <!-- Blog post-->
+                            <div class="card mb-4">
+                                <a href=`/blog/${post.slug}`><img class="card-img-top" src=`/posts/${post.folder_big}` alt="..."></a>
+                                <div class="card-body">
+                                    <div class="small text-muted">{post.date}</div>
+                                    <h2 class="card-title h4">{post.title}</h2>
+                                    <p class="card-text">{post.header}</p>
+                                    <a class="btn btn-edital" href=`/blog/${post.slug}`>Ler mais →</a>
+                                </div>
+                            </div>
+                      </div>
+                    ))}
+                  </div>
+              </div>
+          </div>
+      </div>
+  </Blog>

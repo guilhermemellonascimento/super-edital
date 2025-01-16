@@ -1,16 +1,30 @@
 ---
 import Form from '../components/search/Form.astro';
+const activePage = Astro.url.pathname;
+console.log(activePage)
 ---
 
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-  <div class="container-fluid">
-    <!-- <div class="d-flex"> -->
-        <a href="/">
-          <img src="/logo.webp" width="60px" height="100%" alt="Super Edital" />
-        </a>
-        <a class="navbar-brand" href="/" style="margin-left: 5px; font-weight: 600; font-size: 20px">SUPER EDITAL</a>
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a href="/">
+        <img src="/logo.webp" width="60px" height="100%" alt="Super Edital" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class={`nav-link ${activePage === '/' ? 'active' : ''}`} aria-current="page" href="/">Início</a>
+          </li>
+          <li class="nav-item">
+            <a class={`nav-link ${activePage.includes('/blog') ? 'active' : ''}`} href="/blog">Blog</a>
+          </li>
+        </ul>
+      </div>
 
-        <Form />
-    <!-- </div> -->
-  </div>
-</nav>
+      <Form />
+    </div>
+  </nav>
+</header>
