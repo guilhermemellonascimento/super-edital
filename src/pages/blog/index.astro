@@ -22,7 +22,7 @@ const normalPosts = posts.filter(post => post.featured !== "true");
                   <!-- Featured blog post-->
                   {featuredPost && (
                     <div class="card mb-4">
-                        <a href=`/blog/${featuredPost.slug}`><img class="card-img-top" src=`/posts/${featuredPost.folder_big}` alt="..."></a>
+                        <a href=`/blog/${featuredPost.slug}`><img class="card-img-top" loading="lazy" src=`/posts/${featuredPost.folder_big}` alt="..."></a>
                         <div class="card-body">
                             <div class="small text-muted">{featuredPost.date}</div>
                             <h2 class="card-title">{featuredPost.title}</h2>
@@ -40,7 +40,7 @@ const normalPosts = posts.filter(post => post.featured !== "true");
                       <div class="col-lg-6">
                           <!-- Blog post-->
                             <div class="card mb-4">
-                                <a href=`/blog/${post.slug}`><img class="card-img-top" src=`/posts/${post.folder_big}` alt="..."></a>
+                                <a href=`/blog/${post.slug}`><img class="card-img-top" loading="lazy" src=`/posts/${post.folder_big}` alt="..."></a>
                                 <div class="card-body">
                                     <div class="small text-muted">{post.date}</div>
                                     <h2 class="card-title h4">{post.title}</h2>
