@@ -9,5 +9,7 @@ export function slugify(string) {
     .toLowerCase()
     .trim()
     .replace(/[\s_]+/g, '-') // Replace spaces or underscores with a hyphen
-    .replace(/[^\w\-]+/g, ''); // Remove non-word characters
+    .replace(/-{2,}/g, '-') // Replace multiple consecutive hyphens with a single one
+    .replace(/[^\w\-]+/g, '') // Remove non-word characters
+    .replace(/^-+|-+$/g, ''); // Remove leading or trailing hyphens
 }
