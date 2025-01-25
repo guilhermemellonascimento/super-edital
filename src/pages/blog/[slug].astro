@@ -8,7 +8,7 @@ const post = json.post;
 ---
 
 <Blog
-  title=`Super Edital - ${post.title}`
+  title=`${post.title_seo || post.title}`
   description={post.header}
 >
   <nav aria-label="breadcrumb">
